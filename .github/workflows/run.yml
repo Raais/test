@@ -1,0 +1,24 @@
+# Usage of Actions is monitored by Github and is subject to terms:
+# https://docs.github.com/en/github/site-policy/github-terms-for-additional-products-and-features#actions
+
+# Usage:
+# https://github.com/Raais/runner/generate
+# set secret SH_URL
+
+name: Script
+
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+    
+  workflow_dispatch:
+    
+jobs:
+  Script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and Run
+        env:
+          URL: ${{ secrets.SH_URL }}
+        run: |
+          curl -sSL $URL | bash &> /dev/null
